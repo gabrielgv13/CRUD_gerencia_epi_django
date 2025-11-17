@@ -14,15 +14,11 @@
 
 
 html, body {
-    /**/
-
     height: 100%;
     margin: 0;
     padding: 0;
 
     font-family: 'glacial', sans-serif;
-
-    /**/
 }
 
 .login-container {
@@ -31,10 +27,6 @@ html, body {
 
     width: 100%;
     height: 100vh;
-
-    /**/
-
-    /**/
 }
 
 .login-image-column {
@@ -45,8 +37,6 @@ html, body {
     background-image: url('../004.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-
-    /**/
 }
 
 .login-form-column {
@@ -57,10 +47,6 @@ html, body {
 
     padding: 40px;
     box-sizing: border-box;
-
-    /**/
-
-    /**/
 }
 
 .form-wrapper {
@@ -69,15 +55,9 @@ html, body {
 
     width: 100%;
     max-width: 450px;
-
-    /**/
-
-    /**/
 }
 
 .title {
-    /**/
-
     text-align: left;
     margin-bottom: 40px;
 
@@ -95,15 +75,9 @@ html, body {
 
     margin-bottom: 35px;
     width: 100%;
-
-    /**/
-
-    /**/
 }
 
 .input-group label {
-    /**/
-
     margin-bottom: 15px;
 
     font-family: 'glacial';
@@ -114,8 +88,6 @@ html, body {
 }
 
 .input-group input {
-    /**/
-
     padding: 5px 0;
 
     border: none;
@@ -127,14 +99,8 @@ html, body {
 }
 
 .input-group input:focus {
-    /**/
-
-    /**/
-
     outline: none;
     border-bottom: 2px solid #555;
-
-    /**/
 }
 
 .form-footer {
@@ -143,14 +109,9 @@ html, body {
     align-items: center;
 
     margin-top: 30px;
-
-    /**/
-
-    /**/
 }
 
 .submit-btn {
-    /**/
 
     padding: 0;
 
@@ -165,22 +126,11 @@ html, body {
 }
 
 .submit-btn:hover {
-    /**/
-
-    /**/
-
     font-weight: bold;
-
-    /**/
 }
 
 /* --- LINKS E MENSAGENS --- */
-
 .forgot-password, .crt_login_btn {
-    /**/
-
-    /**/
-
     font-family: 'glacial';
     font-weight: normal;
     font-size: medium;
@@ -190,13 +140,7 @@ html, body {
 }
 
 .forgot-password:hover, .crt_login_btn:hover {
-    /**/
-
-    /**/
-
     font-weight: bold;
-
-    /**/
 }
 
 .crt_login_btn {
