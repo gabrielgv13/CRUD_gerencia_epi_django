@@ -12,6 +12,10 @@ from .models import Colaborador, Equipamento
 # Importa TODOS os formulários que vamos usar
 from .forms import LoginForm, RegistrationForm, ColaboradorForm, EquipamentoForm
 
+# frameworks
+# Django Messages Framework
+from django.contrib import messages
+
 # --- VIEW DE LOGIN (USANDO FORM) ---
 def login_view(request):
     if request.user.is_authenticated:
@@ -118,23 +122,22 @@ def app_users(request):
 
 @login_required
 def app_users_create(request):
-    """
-    CREATE: Adiciona um novo colaborador.
-    """
     if request.method == 'POST':
         form = ColaboradorForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('app_users')
+            colaborador_salvo = form.save()
+            messages.success(request, f'Colaborador "{colaborador_salvo.nome}" cadastrado com sucesso!')
+            # SEM 'redirect' e SEM 'form = ColaboradorForm()'
+        else:
+            messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
     else:
         form = ColaboradorForm()
-
+    
     context = {
-        'form': form,
+        'form': form, # O 'form' (preenchido ou vazio) é enviado para o template
         'page_title': 'Cadastrar Novo Colaborador',
         'active_nav': 'users'
     }
-    # Usa o template de formulário genérico
     return render(request, 'app_ui_form_base.html', context)
 
 @login_required
@@ -209,16 +212,23 @@ def app_items(request):
 
 @login_required
 def app_items_create(request):
-    """
-    CREATE: Adiciona um novo equipamento.
-    """
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('app_items')
+            item_salvo = form.save()
+            messages.success(request, f'Equipamento "{item_salvo.nome}" cadastrado com sucesso!')
+            # SEM 'redirect' e SEM 'form = EquipamentoForm()'
+        else:
+            messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
     else:
         form = EquipamentoForm()
+
+    context = {
+        'form': form,
+        'page_title': 'Cadastrar Novo Equipamento',
+        'active_nav': 'items'
+    }
+    return render(request, 'app_ui_form_base.html', context)
 
     context = {
         'form': form,

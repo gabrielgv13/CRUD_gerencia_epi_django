@@ -1,3 +1,4 @@
+/* usado pelas páginas de login e páginas com prefixo base ex: base_app, base_login */
 @font-face {
     font-family: 'glacial';
     src: url('../fonts/GlacialIndifference-Regular.woff2') format('woff2');
@@ -11,7 +12,6 @@
     font-weight: bold;
     font-style: normal;
 }
-
 
 html, body {
     height: 100%;

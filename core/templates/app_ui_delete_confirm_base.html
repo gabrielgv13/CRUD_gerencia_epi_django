@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block nav %}
-    <a href="{% url 'app_dashboard' %}">Dashboard</a>
-    <a href="{% url 'app_users' %}">Colaboradores</a>
-    <a href="{% url 'app_items' %}">Equipamentos</a>
-    ... (etc) ...
+    <a href="{% url 'app_dashboard' %}" {% if active_nav == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
+    <a href="{% url 'app_users' %}" {% if active_nav == 'users' %}class="active"{% endif %}>Colaboradores</a>
+    <a href="{% url 'app_items' %}" {% if active_nav == 'items' %}class="active"{% endif %}>Equipamentos</a>
+    <a href="{% url 'app_requests' %}" {% if active_nav == 'requests' %}class="active"{% endif %}>Empréstimos</a>
+    <a href="{% url 'app_history' %}" {% if active_nav == 'history' %}class="active"{% endif %}>Movimentações</a>
+    <a href="{% url 'app_reports' %}" {% if active_nav == 'reports' %}class="active"{% endif %}>Relatórios</a>
+    <a href="{% url 'app_configs' %}" {% if active_nav == 'configs' %}class="active"{% endif %}>Configurações</a>
 {% endblock %}
 
 {% block content %}
