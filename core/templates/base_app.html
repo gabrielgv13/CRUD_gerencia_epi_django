@@ -7,8 +7,6 @@
     <title>{% block title %}Sistema EPI{% endblock %}</title>
     
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -44,7 +42,6 @@
     </aside>
 
     <main class="content">
-        
         <div class="topbar">
             <div class="page-title">
                 <h2>{% block page_title %}{{ page_title|default:"Painel de Controle" }}{% endblock %}</h2>
@@ -59,21 +56,64 @@
         </div>
 
         <div class="page-content">
-            {% if messages %}
-                <div class="messages-container-form">
-                    {% for message in messages %}
-                        <div class="message {{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            {% block content %}
-            {% endblock %}
+            {% block content %}{% endblock %}
         </div>
-
     </main>
+
+    <div id="appModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <i id="modalIcon" class="fas fa-check-circle"></i>
+            </div>
+            <h3 id="modalTitle" class="modal-title">Sucesso!</h3>
+            <p id="modalText" class="modal-text">Ação realizada com sucesso.</p>
+            <button class="modal-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        // Lógica para controlar o Modal com base nas mensagens do Django
+        function showModal(type, text) {
+            const modal = document.getElementById('appModal');
+            const modalBox = modal.querySelector('.modal-box');
+            const icon = document.getElementById('modalIcon');
+            const title = document.getElementById('modalTitle');
+            const msgText = document.getElementById('modalText');
+
+            // Reseta classes
+            modalBox.classList.remove('modal-success', 'modal-error');
+
+            if (type === 'success') {
+                modalBox.classList.add('modal-success');
+                icon.className = 'fas fa-check-circle';
+                title.innerText = 'Sucesso!';
+            } else {
+                modalBox.classList.add('modal-error');
+                icon.className = 'fas fa-times-circle';
+                title.innerText = 'Atenção';
+            }
+
+            msgText.innerText = text;
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('appModal').classList.remove('show');
+        }
+
+        // Verifica se o Django enviou mensagens
+        document.addEventListener("DOMContentLoaded", function() {
+            {% if messages %}
+                {% for message in messages %}
+                    // Chama o modal para a mensagem (prioriza a última se houver várias, ou empilha)
+                    // '{{ message.tags }}' geralmente retorna 'success', 'error', 'warning' etc.
+                    showModal('{{ message.tags }}', '{{ message }}');
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
 
 </body>
 </html>
