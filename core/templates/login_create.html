@@ -1,5 +1,6 @@
 {% extends 'base_login.html' %}
 {% load static %}
+
 {% block content %}
 
 <div class="login-container">
@@ -10,7 +11,16 @@
     <div class="login-form-column">
     
         <div class="form-wrapper">
-            <h1 class="title">CRIE SEU LOGIN</h1>
+            
+            <a href="{% url 'login' %}" class="back-link">
+                &larr; Voltar para Login
+            </a>
+
+            <h1 class="title">Criar Conta</h1>
+            
+            {% if form.non_field_errors %}
+                <div class="alert-box">{{ form.non_field_errors|striptags }}</div>
+            {% endif %}
     
             <form action="{% url 'login_create' %}" method="post">
                 {% csrf_token %}
@@ -38,12 +48,9 @@
                         <p class="error-message">{{ form.cf_password.errors|striptags }}</p>
                     {% endif %}
                 </div>
-    
-                {% if form.non_field_errors %}
-                    <p class="error-message">{{ form.non_field_errors|striptags }}</p>
-                {% endif %}
                 
-                <div class="form-footer" style="justify-content: flex-end;"> <input type="submit" value="CRIAR" class="submit-btn" />
+                <div class="form-footer"> 
+                    <input type="submit" value="CRIAR CONTA" class="submit-btn" />
                 </div>
             </form>
         </div>

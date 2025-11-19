@@ -1,5 +1,6 @@
 {% extends 'base_login.html' %}
 {% load static %}
+
 {% block content %}
 
 <div class="login-container">
@@ -10,7 +11,14 @@
     <div class="login-form-column">
 
         <div class="form-wrapper">
-            <h1 class="title">FAÇA SEU LOGIN</h1>
+            <h1 class="title">Login</h1>
+            
+            {% if error %}
+                <div class="alert-box">{{ error }}</div>
+            {% endif %}
+            {% if form.non_field_errors %}
+                <div class="alert-box">{{ form.non_field_errors|striptags }}</div>
+            {% endif %}
     
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
@@ -31,20 +39,16 @@
                     {% endif %}
                 </div>
     
-                {% if error %}
-                    <p class="error-message">{{ error }}</p>
-                {% endif %}
-                {% if form.non_field_errors %}
-                    <p class="error-message">{{ form.non_field_errors|striptags }}</p>
-                {% endif %}
+                <div class="actions-row">
+                    <a href="#" class="secondary-link">Esqueci minha senha</a>
+                </div>
                 
                 <div class="form-footer">
-                    <a href="#" class="forgot-password">ESQUECI MINHA SENHA</a>
                     <input type="submit" value="ENTRAR" class="submit-btn" />
                 </div>
             </form>
     
-            <a href="{% url 'login_create' %}" class="crt_login_btn">CRIAR CONTA</a>
+            <a href="{% url 'login_create' %}" class="create-account-link">NÃO TEM CONTA? CADASTRE-SE</a>
         </div>
 
     </div>

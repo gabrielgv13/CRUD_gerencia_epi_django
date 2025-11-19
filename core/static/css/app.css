@@ -1,294 +1,250 @@
-/* usado para todas as páginas que contém app como prefixo */
-body {
-  display: flex;
+/* core/static/css/app.css */
 
-  margin: 0;
-  height: 100vh;
-
-  font-family: Arial, sans-serif;
-
-  background-color: #f6f6f6;
+/* --- FONTES (Mesmas do Login) --- */
+@font-face {
+    font-family: 'glacial';
+    src: url('../fonts/GlacialIndifference-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
+@font-face {
+    font-family: 'glacial';
+    src: url('../fonts/GlacialIndifference-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* --- GERAL --- */
+body {
+    display: flex;
+    margin: 0;
+    height: 100vh;
+    font-family: 'glacial', sans-serif; /* Fonte atualizada */
+    background-color: #F4F7FA; /* Fundo levemente azulado para combinar */
+    color: #333;
+    overflow: hidden; /* Evita scroll duplo na página inteira */
+}
+
+a {
+    text-decoration: none;
+}
+
+/* --- SIDEBAR (ESQUERDA) --- */
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 250px;
-  padding-top: 20px;
-  padding: 10px 20px;
-  
-  border-right: 2px solid #ddd;
-
-  background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 260px; /* Um pouco mais larga para conforto */
+    padding: 20px;
+    background-color: #1F497D; /* AZUL TEMA */
+    color: white;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1); /* Sombra suave sobre o conteúdo */
+    z-index: 10;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-direction: column;
-
-  margin-bottom: 40px;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
 }
 
 .logo img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  margin-right: 10px;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Destaque na logo */
 }
 
 .logo h1 {
-  font-size: 18px;
-  font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
 }
 
+/* --- MENU --- */
 .menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
 }
 
 .menu a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  width: 85%;
-  padding: 10px 20px;
-
-  border: 2px solid #000;
-  border-radius: 25px;
-  font-size: 16px;
-  text-decoration: none;
-  transition: 0.2s;
-
-  background-color: #fff;
-  color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Texto alinhado à esquerda */
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8); /* Branco com leve transparência */
+    transition: all 0.3s ease;
+    border: 1px solid transparent; /* Previne pulo no hover */
 }
 
 .menu a:hover {
-  background-color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 30px; /* Efeito de movimento leve */
 }
 
 .menu a.active {
-  background-color: #000;
-  color: #fff;
+    background-color: #ffffff;
+    color: #1F497D; /* Texto azul no fundo branco */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+/* Se quiser adicionar ícones no futuro, prepare o espaçamento */
+.menu a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* --- CONTEÚDO PRINCIPAL (DIREITA) --- */
 .content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    overflow-y: auto; /* Scroll apenas no conteúdo */
 }
 
+/* --- TOPBAR (CABEÇALHO) --- */
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.topbar .user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.page-title h2 {
+    margin: 0;
+    color: #1F497D;
+    font-size: 2rem;
+}
+
+/* Perfil do Usuário */
+.user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user span {
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem;
 }
 
 .user-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 60px;
-  height: 60px;
-
-  border: 2px solid #000;
-  border-radius: 50%;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #1F497D;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
+/* --- ÁREA DE CONTEÚDO BRANCO --- */
 .page-content {
-  flex-grow: 1;
-
-  padding: 20px;
-
-  border: 2px solid #000;
-  border-radius: 10px;
-  
-  background-color: #fff;
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: none; /* Removida a borda preta simples */
+    min-height: 300px;
 }
 
+/* --- TABELAS --- */
 table {
-  width: 100%;
-  margin-top: 10px;
-  
-  border-collapse: collapse;
-}
-
-th, td {
-  text-align: left;
-  padding: 10px;
-  
-  border-bottom: 1px solid #ddd;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th {
-  background-color: #f0f0f0;
+    background-color: #f8f9fa;
+    color: #1F497D;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 15px;
+    border-bottom: 2px solid #1F497D;
 }
 
-/*/Estilo do botao adicionar /*/
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+tr:hover td {
+    background-color: #f9fbfc; /* Highlight ao passar o mouse na linha */
+}
+
+/* --- BOTÕES --- */
 .btn-add {
-  padding: 10px 20px;
-  display: inline-block;
-  background-color: #1F497D;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+    background-color: #1F497D;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border: none;
+    box-shadow: 0 4px 6px rgba(31, 73, 125, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .btn-add:hover {
-  background-color: #15375E;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #15375E;
+    transform: translateY(-1px);
 }
 
-.btn-add:active {
-  background-color: #0A1C36;
-  transform: translateY(1px);
-  box-shadow: none;
+/* Botões de Ação na Tabela */
+.btn-edit, .btn-delete {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Estilo para o Botao Editar*/
 .btn-edit {
-  padding: 5px 10px; /* Um pouco menor, adequado para acoes em linha */
-  display: inline-block;
-  background-color: #1F497D;
-  color: white;
-  border: none;
-  border-radius: 3px; /* Cantos levemente menores */
-  font-family: Arial, sans-serif;
-  font-size: 14px; /* Fonte um pouco menor */
-  font-weight: normal;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  margin-right: 5px; /* Espaçamento entre Editar e Excluir */
+    background-color: #e3f2fd; /* Azul bem clarinho */
+    color: #1F497D;
 }
 
 .btn-edit:hover {
-  background-color: #15375E;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra menor */
+    background-color: #1F497D;
+    color: white;
 }
 
-.btn-edit:active {
-  background-color: #0A1C36;
-  transform: translateY(1px);
-  box-shadow: none;
-}
-
-/* Estilo para o Botão "Excluir"*/
 .btn-delete {
-  padding: 5px 10px;
-  display: inline-block;
-  background-color: #8B0000;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+    background-color: #ffebee; /* Vermelho bem clarinho */
+    color: #c62828;
 }
 
 .btn-delete:hover {
-  background-color: #650000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #c62828;
+    color: white;
 }
-
-.btn-delete:active {
-  background-color: #4B0000;
-  transform: translateY(1px);
-  box-shadow: none;
-}
-
-.btn-save {
-  /* Estilo Base para o Botão Salvar (Azul Escuro) */
-  padding: 8px 15px;
-  display: inline-block;
-  background-color: #1F497D; 
-  color: white;
-  border: none;
-  border-radius: 4px; /* Levemente arredondado */
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  margin-right: 10px; /* Espaçamento entre Salvar e Cancelar */
-}
-
-.btn-save:hover {
-  background-color: #15375E; /* Azul mais escuro no hover */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.btn-save:active {
-  background-color: #0A1C36; /* Azul no clique */
-  transform: translateY(1px);
-  box-shadow: none;
-}
-
-.btn-cancel {
-  /* Estilo para o Link Cancelar (Apenas texto, sem fundo) */
-  padding: 8px 10px; /* Padding leve para dar área de clique */
-  display: inline-block;
-  background: none; /* Sem cor de fundo */
-  color: #1F497D; /* Usa o azul primário para o texto do link */
-  border: none;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  text-decoration: underline; /* Mantém o sublinhado, mas suave */
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.btn-cancel:hover {
-  color: #0A1C36; /* Azul bem escuro no hover */
-  text-decoration: none; /* Remove o sublinhado no hover */
-}
-
-.messages-container-form {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.message {
-    padding: 15px 25px;
-    border-radius: 5px;
-    color: #fff;
-    display: inline-block;
-    font-weight: bold;
-}
-.message.success { background-color: #28a745; }
-.message.error { background-color: #dc3545; }

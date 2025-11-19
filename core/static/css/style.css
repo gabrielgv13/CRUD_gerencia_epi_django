@@ -1,4 +1,6 @@
-/* usado pelas páginas de login e páginas com prefixo base ex: base_app, base_login */
+/* core/static/css/style.css */
+
+/* Fontes */
 @font-face {
     font-family: 'glacial';
     src: url('../fonts/GlacialIndifference-Regular.woff2') format('woff2');
@@ -13,154 +15,214 @@
     font-style: normal;
 }
 
+/* Reset e Base */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-
-    font-family: 'glacial', sans-serif;
+    font-family: 'glacial', sans-serif; /* Fonte padrão da área de login */
+    background-color: #f6f6f6;
+    color: #333;
 }
 
+/* Layout Principal */
 .login-container {
     display: flex;
     flex-direction: row;
-
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
 .login-image-column {
-    flex: 1;
-
-    background-position: center;
-
+    flex: 1.2; /* Imagem ocupa um pouco mais de espaço */
     background-image: url('../004.jpg');
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Overlay opcional na imagem para dar um tom mais "profissional" se a imagem for muito clara */
+.login-image-column::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.2); 
 }
 
 .login-form-column {
-    flex: 2;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    background-color: #fff;
     padding: 40px;
-    box-sizing: border-box;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.05); /* Sombra sutil vindo da direita */
+    position: relative;
+    z-index: 10;
 }
 
+/* Wrapper do Formulário */
 .form-wrapper {
     display: flex;
     flex-direction: column;
-
     width: 100%;
-    max-width: 450px;
+    max-width: 400px; /* Largura controlada para não esticar demais */
 }
 
 .title {
     text-align: left;
-    margin-bottom: 40px;
-
-    font-size: xx-large;
+    margin-bottom: 30px;
+    font-size: 2rem; /* 32px aprox */
     font-family: 'glacial';
-    font-weight: normal;
-    text-decoration: none;
-
-    color: black;
+    font-weight: bold;
+    color: #1F497D; /* Azul do tema */
+    border-left: 5px solid #1F497D;
+    padding-left: 15px;
 }
 
+/* Inputs */
 .input-group {
     display: flex;
     flex-direction: column;
-
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     width: 100%;
 }
 
 .input-group label {
-    margin-bottom: 15px;
-
-    font-family: 'glacial';
-    font-weight: normal;
-    font-size: large;
-
-    color: black;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .input-group input {
-    padding: 5px 0;
-
-    border: none;
-    border-bottom: 2px solid black;
-    font-size: large;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
     font-family: 'glacial';
-
-    background-color: transparent;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
 }
 
 .input-group input:focus {
     outline: none;
-    border-bottom: 2px solid #555;
+    border-color: #1F497D; /* Foco com a cor do tema */
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(31, 73, 125, 0.1);
 }
 
+/* Mensagens de Erro */
+.error-message {
+    font-size: 0.85rem;
+    color: #dc3545;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.alert-box {
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* Rodapé do Formulário e Botões */
 .form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.actions-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
+/* Botão Principal (Entrar / Criar) */
 .submit-btn {
-
-    padding: 0;
-
+    width: 100%;
+    padding: 12px;
     border: none;
+    border-radius: 6px;
+    background-color: #1F497D; /* Azul tema */
+    color: white;
     font-family: 'glacial';
-    font-weight: normal;
-    font-size: large;
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
-
-    background-color: transparent;
-    color: black;
+    transition: background-color 0.3s, transform 0.2s;
+    text-transform: uppercase;
 }
 
 .submit-btn:hover {
-    font-weight: bold;
+    background-color: #15375E; /* Azul mais escuro */
 }
 
-/* --- LINKS E MENSAGENS --- */
-.forgot-password, .crt_login_btn {
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Links (Esqueci senha, Criar conta, Voltar) */
+.secondary-link {
     font-family: 'glacial';
-    font-weight: normal;
-    font-size: medium;
+    font-size: 0.9rem;
+    color: #666;
     text-decoration: none;
-
-    color: black;
+    transition: color 0.2s;
 }
 
-.forgot-password:hover, .crt_login_btn:hover {
+.secondary-link:hover {
+    color: #1F497D;
+    text-decoration: underline;
+}
+
+.create-account-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #1F497D;
+    text-decoration: none;
     font-weight: bold;
+    border: 2px solid #1F497D;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s;
 }
 
-.crt_login_btn {
-    /**/
-
-    margin-top: 40px;
-    text-align: left;
-
-    /**/
-
-    /**/
+.create-account-link:hover {
+    background-color: #1F497D;
+    color: #fff;
 }
 
-.error-message {
-    /**/
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #555;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 20px; /* Espaço antes do título */
+    transition: color 0.2s;
+}
 
-    text-align: left;
-    margin-top: 15px;
+.back-link:hover {
+    color: #1F497D;
+}
 
-    font-family: 'glacial';
-
-    color: red;
+/* Utilitário para alinhar à direita */
+.align-right {
+    text-align: right;
 }

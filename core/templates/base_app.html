@@ -3,41 +3,77 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Estoque de EPI{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema EPI{% endblock %}</title>
+    
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-    <header>
-
-    </header>
 <body>
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="{% static 'capacete.png' %}" alt="logo">
-      <h1>Sistema de Gestão de EPIs</h1>
-    </div>
-    <nav class="menu">
-      {% block nav %}
-      {% endblock %}
-    </nav>
-  </aside>
 
-  <main class="content">
-    <div class="topbar">
-      <h2 id="page-title">{% block page_title %}Dashboard{% endblock %}</h2>
-      
-      <div class="user">
-        <div class="user-icon">👤</div>
-        <strong>{{ request.user.username }}</strong>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="{% static 'capacete.png' %}" alt="Logo"> 
+            <h1>Gestão EPI</h1>
         </div>
-    </div>
 
-    <div class="page-content">
-      {% block content %}
-        {% endblock %}
-    </div>
-  </main>
-</body>
-    <footer>
+        <nav class="menu">
+            <a href="{% url 'app_dashboard' %}" class="{% if active_nav == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-home"></i> INÍCIO
+            </a>
+            <a href="{% url 'app_users' %}" class="{% if active_nav == 'users' %}active{% endif %}">
+                <i class="fas fa-users"></i> COLABORADORES
+            </a>
+            <a href="{% url 'app_items' %}" class="{% if active_nav == 'items' %}active{% endif %}">
+                <i class="fas fa-tools"></i> EQUIPAMENTOS
+            </a>
+            <a href="{% url 'app_requests' %}" class="{% if active_nav == 'requests' %}active{% endif %}">
+                <i class="fas fa-hand-holding"></i> SOLICITAÇÕES
+            </a>
+            <a href="{% url 'app_history' %}" class="{% if active_nav == 'history' %}active{% endif %}">
+                <i class="fas fa-history"></i> HISTÓRICO
+            </a>
+            <a href="{% url 'app_reports' %}" class="{% if active_nav == 'reports' %}active{% endif %}">
+                <i class="fas fa-chart-bar"></i> RELATÓRIOS
+            </a>
+            <a href="{% url 'app_configs' %}" class="{% if active_nav == 'configs' %}active{% endif %}">
+                <i class="fas fa-cog"></i> CONFIGURAÇÕES
+            </a>
+        </nav>
+    </aside>
+
+    <main class="content">
         
-    </footer>
+        <div class="topbar">
+            <div class="page-title">
+                <h2>{% block page_title %}{{ page_title|default:"Painel de Controle" }}{% endblock %}</h2>
+            </div>
+
+            <div class="user">
+                <span>Olá, {{ request.user.username }}</span>
+                <div class="user-icon">
+                    {{ request.user.username|make_list|first|upper }}
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            {% if messages %}
+                <div class="messages-container-form">
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </main>
+
+</body>
 </html>
