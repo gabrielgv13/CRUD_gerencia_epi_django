@@ -124,9 +124,9 @@ html, body {
 /* Botão principal */
 .submit-btn {
     padding: 12px 22px;
-    background-color: #000;
-    color: #fff;
-    border: none;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
     border-radius: 25px;
     font-size: 15px;
     cursor: pointer;
@@ -134,7 +134,8 @@ html, body {
 }
 
 .submit-btn:hover {
-    background-color: #333;
+    background-color: #000;
+    color: #fff;
 }
 
 /* ---------------------------------------------------------
