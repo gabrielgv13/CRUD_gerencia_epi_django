@@ -55,14 +55,16 @@ class RegistrationForm(forms.Form):
 class ColaboradorForm(forms.ModelForm):
     class Meta:
         model = Colaborador
-        fields = ['nome', 'email'] # Campos que aparecerão no formulário
+        fields = ['nome', 'email','funcao'] # Campos que aparecerão no formulário
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Nome completo'}),
             'email': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'email@empresa.com'}),
+            'funcao': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Função'}),
         }
         labels = {
             'nome': 'Nome do Colaborador',
             'email': 'Email Profissional',
+            'funcao': 'Função do Colaborador',
         }
 
 class EquipamentoForm(forms.ModelForm):
