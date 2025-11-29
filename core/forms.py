@@ -59,7 +59,7 @@ class ColaboradorForm(forms.ModelForm):
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Nome completo'}),
             'email': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'email@empresa.com'}),
-            'funcao': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Função'}),
+            'funcao': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Função'}),
         }
         labels = {
             'nome': 'Nome do Colaborador',
