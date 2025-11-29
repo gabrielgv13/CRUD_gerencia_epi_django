@@ -85,4 +85,18 @@ class EquipamentoForm(forms.ModelForm):
 class EmprestimoForm(forms.ModelForm):
     class Meta:
         model = Emprestimos
-        fields = ['nome', 'equipamento', 'quantidade', 'data_emprestimo', 'data_prazo', 'estoque_disponivel']
+        fields = ['nome', 'equipamento', 'quantidade', 'data_prazo', 'estoque_disponivel']
+        widgets = {
+            'nome': forms.Select(attrs={'class': 'form-input'}),
+            'equipamento': forms.Select(attrs={'class': 'form-input'}),
+            'quantidade': forms.NumberInput(attrs={'class': 'form-input', 'min': '1'}),
+            'data_prazo': forms.DateTimeInput(attrs={'class': 'form-input', 'type': 'datetime-local'}),
+            'estoque_disponivel': forms.NumberInput(attrs={'class': 'form-input', 'min': '0'}),
+        }
+        labels = {
+            'nome': 'Colaborador',
+            'equipamento': 'Equipamento',
+            'quantidade': 'Quantidade Emprestada',
+            'data_prazo': 'Data de Devolução Prevista',
+            'estoque_disponivel': 'Estoque Disponível Após Empréstimo',
+        }

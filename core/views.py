@@ -8,9 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 # --- IMPORTS CORRIGIDOS ---
 # Importa os modelos
-from .models import Colaborador, Equipamento 
+from .models import Colaborador, Equipamento, Emprestimos
 # Importa TODOS os formulários que vamos usar
-from .forms import LoginForm, RegistrationForm, ColaboradorForm, EquipamentoForm
+from .forms import LoginForm, RegistrationForm, ColaboradorForm, EquipamentoForm, EmprestimoForm
 
 # frameworks
 # Django Messages Framework
@@ -116,9 +116,8 @@ def app_users(request):
         'add_url_name': 'app_users_create',
         'edit_url_name': 'app_users_edit',   
         'delete_url_name': 'app_users_delete',
-        'active_nav': 'users'
     }
-    return render(request, 'app_ui_users.html', context) #
+    return render(request, 'app_ui_users.html', context)
 
 @login_required
 def app_users_create(request):
@@ -127,16 +126,14 @@ def app_users_create(request):
         if form.is_valid():
             colaborador_salvo = form.save()
             messages.success(request, f'Colaborador "{colaborador_salvo.nome}" cadastrado com sucesso!')
-            # SEM 'redirect' e SEM 'form = ColaboradorForm()'
         else:
             messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
     else:
         form = ColaboradorForm()
     
     context = {
-        'form': form, # O 'form' (preenchido ou vazio) é enviado para o template
+        'form': form,
         'page_title': 'Cadastrar Novo Colaborador',
-        'active_nav': 'users'
     }
     return render(request, 'app_ui_form_base.html', context)
 
@@ -159,7 +156,6 @@ def app_users_edit(request, pk):
         'form': form,
         'page_title': f'Editar Colaborador: {colaborador.nome}'
     }
-    # Usa o template de formulário genérico
     return render(request, 'app_ui_form_base.html', context)
 
 @login_required
@@ -173,13 +169,9 @@ def app_users_delete(request, pk):
         colaborador.delete()
         return redirect('app_users')
 
-    # --- CORREÇÃO AQUI ---
-    # Passa o 'item' para o template de deleção genérico
     context = {
         'item': colaborador,
-        'active_nav': 'users' 
     }
-    # Usa o template de deleção genérico
     return render(request, 'app_ui_delete_confirm_base.html', context)
 
 
@@ -206,7 +198,6 @@ def app_items(request):
         'add_url_name': 'app_items_create',
         'edit_url_name': 'app_items_edit',   
         'delete_url_name': 'app_items_delete',
-        'active_nav': 'items' 
     }
     return render(request, 'app_ui_items.html', context)
 
@@ -217,7 +208,6 @@ def app_items_create(request):
         if form.is_valid():
             item_salvo = form.save()
             messages.success(request, f'Equipamento "{item_salvo.nome}" cadastrado com sucesso!')
-            # SEM 'redirect' e SEM 'form = EquipamentoForm()'
         else:
             messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
     else:
@@ -226,14 +216,6 @@ def app_items_create(request):
     context = {
         'form': form,
         'page_title': 'Cadastrar Novo Equipamento',
-        'active_nav': 'items'
-    }
-    return render(request, 'app_ui_form_base.html', context)
-
-    context = {
-        'form': form,
-        'page_title': 'Cadastrar Novo Equipamento',
-        'active_nav': 'items'
     }
     return render(request, 'app_ui_form_base.html', context)
 
@@ -255,7 +237,6 @@ def app_items_edit(request, pk):
     context = {
         'form': form,
         'page_title': f'Editar Equipamento: {item.nome}',
-        'active_nav': 'items'
     }
     return render(request, 'app_ui_form_base.html', context)
 
@@ -272,16 +253,105 @@ def app_items_delete(request, pk):
 
     context = {
         'item': item,
-        'active_nav': 'items'
+    }
+    return render(request, 'app_ui_delete_confirm_base.html', context)
+
+
+# --- CRUD DE EMPRÉSTIMOS ---
+
+@login_required
+def app_requests(request):
+    """
+    READ (List): Mostra todos os empréstimos.
+    """
+    emprestimos = Emprestimos.objects.all().order_by('-data_emprestimo')
+    
+    object_data = []
+    for emp in emprestimos:
+        object_data.append({
+            'pk': emp.pk,
+            'fields': [
+                emp.nome.nome, 
+                emp.equipamento.nome, 
+                emp.quantidade,
+                emp.data_emprestimo.strftime('%d/%m/%Y %H:%M'),
+                emp.data_prazo.strftime('%d/%m/%Y %H:%M'),
+                emp.estoque_disponivel
+            ]
+        })
+
+    context = {
+        'page_title': 'Empréstimos',
+        'headers': ['Colaborador', 'Equipamento', 'Quantidade', 'Data Empréstimo', 'Prazo Devolução', 'Estoque Disponível'],
+        'object_data': object_data,
+        'add_url_name': 'app_requests_create',
+        'edit_url_name': 'app_requests_edit',   
+        'delete_url_name': 'app_requests_delete',
+    }
+    return render(request, 'app_ui_requests.html', context)
+
+@login_required
+def app_requests_create(request):
+    if request.method == 'POST':
+        form = EmprestimoForm(request.POST)
+        if form.is_valid():
+            emprestimo_salvo = form.save()
+            messages.success(request, f'Empréstimo para "{emprestimo_salvo.nome.nome}" cadastrado com sucesso!')
+            return redirect('app_requests')
+        else:
+            messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
+    else:
+        form = EmprestimoForm()
+    
+    context = {
+        'form': form,
+        'page_title': 'Cadastrar Novo Empréstimo',
+    }
+    return render(request, 'app_ui_form_base.html', context)
+
+@login_required
+def app_requests_edit(request, pk):
+    """
+    UPDATE: Edita um empréstimo existente.
+    """
+    emprestimo = get_object_or_404(Emprestimos, pk=pk)
+
+    if request.method == 'POST':
+        form = EmprestimoForm(request.POST, instance=emprestimo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Empréstimo atualizado com sucesso!')
+            return redirect('app_requests')
+        else:
+            messages.error(request, 'Falha ao atualizar. Verifique os erros abaixo.')
+    else:
+        form = EmprestimoForm(instance=emprestimo)
+
+    context = {
+        'form': form,
+        'page_title': f'Editar Empréstimo',
+    }
+    return render(request, 'app_ui_form_base.html', context)
+
+@login_required
+def app_requests_delete(request, pk):
+    """
+    DELETE: Exclui um empréstimo.
+    """
+    emprestimo = get_object_or_404(Emprestimos, pk=pk)
+
+    if request.method == 'POST':
+        emprestimo.delete()
+        messages.success(request, 'Empréstimo excluído com sucesso!')
+        return redirect('app_requests')
+
+    context = {
+        'item': emprestimo,
     }
     return render(request, 'app_ui_delete_confirm_base.html', context)
 
 
 # --- OUTRAS VIEWS DO APP ---
-
-@login_required
-def app_requests(request):
-    return render(request, 'app_ui_requests.html')
 
 @login_required
 def app_history(request):

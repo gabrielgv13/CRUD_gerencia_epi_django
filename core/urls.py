@@ -25,8 +25,13 @@ urlpatterns = [
     path('app/items/edit/<int:pk>/', views.app_items_edit, name='app_items_edit'),
     path('app/items/delete/<int:pk>/', views.app_items_delete, name='app_items_delete'),
 
-    # Outras rotas
+    # Emprestimos (Requests)
     path('app/requests', views.app_requests, name='app_requests'),
+    path('app/requests/create/', views.app_requests_create, name='app_requests_create'),
+    path('app/requests/edit/<int:pk>/', views.app_requests_edit, name='app_requests_edit'),
+    path('app/requests/delete/<int:pk>/', views.app_requests_delete, name='app_requests_delete'),
+
+    # Outras rotas
     path('app/history', views.app_history, name='app_history'),
     path('app/reports', views.app_reports, name='app_reports'),
     
