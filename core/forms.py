@@ -1,7 +1,7 @@
 # forms.py
 from django import forms
 from django.contrib.auth.models import User
-from .models import Colaborador, Equipamento
+from .models import Colaborador, Equipamento, Emprestimos
 
 class LoginForm(forms.Form):
     # O widget de EmailInput garante a validação básica do formato
@@ -81,3 +81,8 @@ class EquipamentoForm(forms.ModelForm):
             'marca': 'Marca',
             'quantidade': 'Quantidade em Estoque',
         }
+
+class EmprestimoForm(forms.ModelForm):
+    class Meta:
+        model = Emprestimos
+        fields = ['nome', 'equipamento', 'quantidade', 'data_emprestimo', 'data_prazo', 'estoque_disponivel']

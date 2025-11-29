@@ -16,3 +16,12 @@ class Equipamento(models.Model):
 
     def __str__(self):
         return f"{self.nome} ({self.marca})"
+
+class Emprestimos(models.Model):
+    nome = models.ForeignKey(Colaborador, on_delete=models.PROTECT)
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.PROTECT)
+    quantidade = models.PositiveIntegerField(default=0, help_text="Quantidade disponível no estoque para empréstimo.")
+    data_emprestimo = models.DateTimeField(auto_now_add=True, verbose_name="Data de Cadastro")
+    data_prazo = models.DateTimeField(auto_now=True, verbose_name="Última Atualização")
+    estoque_disponivel = models.PositiveIntegerField(default=0, help_text="Quantidade disponível no estoque para empréstimo.")
+
