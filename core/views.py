@@ -106,12 +106,12 @@ def app_users(request):
     for col in colaboradores:
         object_data.append({
             'pk': col.pk,
-            'fields': [col.nome, col.email]
+            'fields': [col.nome, col.email, col.funcao]
         })
 
     context = {
         'page_title': 'Colaboradores',
-        'headers': ['Nome', 'Email'],
+        'headers': ['Nome', 'Email', 'Função'],
         'object_data': object_data,
         'add_url_name': 'app_users_create',
         'edit_url_name': 'app_users_edit',   
