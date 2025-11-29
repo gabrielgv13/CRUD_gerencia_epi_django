@@ -3,6 +3,7 @@ from django.db import models
 class Colaborador(models.Model):
     nome = models.CharField(max_length=255)
     email = models.EmailField(unique=True, help_text="Email único do colaborador")
+    funcao = models.EmailField(max_length=255)
     # Adicione outros campos se precisar (ex: matrícula, cargo, etc.)
 
     def __str__(self):
