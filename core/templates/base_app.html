@@ -28,12 +28,19 @@
       <div class="user">
         <div class="user-icon">👤</div>
         <strong>{{ request.user.username }}</strong>
-        </div>
+
+        <!-- Botão de Logout fica aqui -->
+        <form method="post" action="{% url 'logout' %}" style="display: inline; margin-left: 5px;">
+            {% csrf_token %}
+            <button type="submit" class="btn-logout">(Sair)</button>
+        </form>
+
+      </div>
     </div>
 
     <div class="page-content">
       {% block content %}
-        {% endblock %}
+      {% endblock %}
     </div>
   </main>
 </body>

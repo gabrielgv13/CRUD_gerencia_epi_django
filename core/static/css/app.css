@@ -292,3 +292,67 @@ th {
 }
 .message.success { background-color: #28a745; }
 .message.error { background-color: #dc3545; }
+
+.form-container {
+  max-width: 500px; /* Limita a largura para não ficar muito esticado */
+}
+
+/* Estiliza os parágrafos que o Django gera com .as_p */
+.form-container p {
+  margin-bottom: 15px;
+}
+
+/* Estilo das Labels (Nomes dos campos) */
+.form-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Estilo dos Inputs (Caixas de texto) */
+.form-container input[type="password"],
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Garante que o padding não quebre a largura */
+  font-size: 14px;
+}
+
+/* Estilo para os textos de ajuda do Django (ex: "A senha deve ter 8 caracteres") */
+.helptext {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Estilo para lista de erros (caso a senha esteja errada) */
+.errorlist {
+  color: #8B0000;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Botão de Logout discreto no cabeçalho */
+.btn-logout {
+  background: none;
+  border: none;
+  color: #8B0000; /* Vermelho escuro */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 8px; /* Espaço entre o nome e o botão */
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.btn-logout:hover {
+  text-decoration: underline;
+  color: #ff0000;
+}
