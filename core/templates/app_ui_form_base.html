@@ -23,11 +23,11 @@
         <button type="submit" class="btn-save">Salvar</button>
 
         {% if 'users' in request.resolver_match.url_name %}
-        <a href="{% url 'app_users' %}" class="btn-cancel">Voltar para Lista</a>
+        <a href="{% url 'colaboradores:app_users' %}" class="btn-cancel">Voltar para Lista</a>
         {% elif 'items' in request.resolver_match.url_name %}
-        <a href="{% url 'app_items' %}" class="btn-cancel">Voltar para Lista</a>
+        <a href="{% url 'equipamentos:app_items' %}" class="btn-cancel">Voltar para Lista</a>
         {% elif 'requests' in request.resolver_match.url_name %}
-        <a href="{% url 'app_requests' %}" class="btn-cancel">Voltar para Lista</a>
+        <a href="{% url 'emprestimos:app_requests' %}" class="btn-cancel">Voltar para Lista</a>
         {% else %}
         <a href="javascript:history.back()" class="btn-cancel">Cancelar</a>
         {% endif %}

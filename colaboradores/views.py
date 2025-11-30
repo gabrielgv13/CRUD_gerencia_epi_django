@@ -22,9 +22,9 @@ def app_users(request):
         'page_title': 'Colaboradores',
         'headers': ['Nome', 'Email', 'Função'],
         'object_data': object_data,
-        'add_url_name': 'app_users_create',
-        'edit_url_name': 'app_users_edit',   
-        'delete_url_name': 'app_users_delete',
+        'add_url_name': 'colaboradores:app_users_create',
+        'edit_url_name': 'colaboradores:app_users_edit',   
+        'delete_url_name': 'colaboradores:app_users_delete',
     }
     return render(request, 'app_ui_users.html', context)
 
@@ -57,7 +57,7 @@ def app_users_edit(request, pk):
         form = ColaboradorForm(request.POST, instance=colaborador)
         if form.is_valid():
             form.save()
-            return redirect('app_users')
+            return redirect('colaboradores:app_users')
     else:
         form = ColaboradorForm(instance=colaborador)
 
@@ -76,7 +76,7 @@ def app_users_delete(request, pk):
 
     if request.method == 'POST':
         colaborador.delete()
-        return redirect('app_users')
+        return redirect('colaboradores:app_users')
 
     context = {
         'item': colaborador,

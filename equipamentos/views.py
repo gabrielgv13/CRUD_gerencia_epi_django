@@ -22,9 +22,9 @@ def app_items(request):
         'page_title': 'Equipamentos',
         'headers': ['Nome', 'Marca', 'Quantidade'],
         'object_data': object_data,
-        'add_url_name': 'app_items_create',
-        'edit_url_name': 'app_items_edit',   
-        'delete_url_name': 'app_items_delete',
+        'add_url_name': 'equipamentos:app_items_create',
+        'edit_url_name': 'equipamentos:app_items_edit',   
+        'delete_url_name': 'equipamentos:app_items_delete',
     }
     return render(request, 'app_ui_items.html', context)
 
@@ -57,7 +57,7 @@ def app_items_edit(request, pk):
         form = EquipamentoForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
-            return redirect('app_items')
+            return redirect('equipamentos:app_items')
     else:
         form = EquipamentoForm(instance=item)
 
@@ -76,7 +76,7 @@ def app_items_delete(request, pk):
 
     if request.method == 'POST':
         item.delete()
-        return redirect('app_items')
+        return redirect('equipamentos:app_items')
 
     context = {
         'item': item,

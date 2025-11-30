@@ -18,17 +18,17 @@
       <h1>Sistema de Gestão de EPIs</h1>
     </div>
     <nav class="menu">
-      <a href="{% url 'app_dashboard' %}"
+      <a href="{% url 'dashboard:app_dashboard' %}"
         class="{% if request.resolver_match.url_name == 'app_dashboard' %}active{% endif %}">Dashboard</a>
-      <a href="{% url 'app_users' %}"
+      <a href="{% url 'colaboradores:app_users' %}"
         class="{% if 'users' in request.resolver_match.url_name %}active{% endif %}">Colaboradores</a>
-      <a href="{% url 'app_items' %}"
+      <a href="{% url 'equipamentos:app_items' %}"
         class="{% if 'items' in request.resolver_match.url_name %}active{% endif %}">Equipamentos</a>
-      <a href="{% url 'app_requests' %}"
+      <a href="{% url 'emprestimos:app_requests' %}"
         class="{% if 'requests' in request.resolver_match.url_name %}active{% endif %}">Empréstimos</a>
-      <a href="{% url 'app_history' %}"
+      <a href="{% url 'historico:app_history' %}"
         class="{% if 'history' in request.resolver_match.url_name %}active{% endif %}">Movimentações</a>
-      <a href="{% url 'app_reports' %}"
+      <a href="{% url 'relatorios:app_reports' %}"
         class="{% if 'reports' in request.resolver_match.url_name %}active{% endif %}">Relatórios</a>
       <a href="{% url 'app_configs' %}"
         class="{% if 'configs' in request.resolver_match.url_name %}active{% endif %}">Configurações</a>

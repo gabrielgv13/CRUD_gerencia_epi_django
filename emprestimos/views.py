@@ -35,10 +35,10 @@ def app_requests(request):
         'page_title': 'Empréstimos',
         'headers': ['Colaborador', 'Equipamento', 'Quantidade', 'Data Empréstimo', 'Prazo Devolução', 'Estoque Disponível', 'Status'],
         'object_data': object_data,
-        'add_url_name': 'app_requests_create',
-        'edit_url_name': 'app_requests_edit',   
-        'delete_url_name': 'app_requests_delete',
-        'return_url_name': 'app_requests_return',
+        'add_url_name': 'emprestimos:app_requests_create',
+        'edit_url_name': 'emprestimos:app_requests_edit',   
+        'delete_url_name': 'emprestimos:app_requests_delete',
+        'return_url_name': 'emprestimos:app_requests_return',
     }
     return render(request, 'app_ui_requests.html', context)
 
@@ -61,7 +61,7 @@ def app_requests_create(request):
             equipamento.save()
             
             messages.success(request, f'Empréstimo para "{emprestimo.nome.nome}" cadastrado com sucesso!')
-            return redirect('app_requests')
+            return redirect('emprestimos:app_requests')
         else:
             messages.error(request, 'Falha no cadastro. Verifique os erros abaixo.')
     else:
@@ -89,7 +89,7 @@ def app_requests_edit(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, f'Empréstimo atualizado com sucesso!')
-            return redirect('app_requests')
+            return redirect('emprestimos:app_requests')
         else:
             messages.error(request, 'Falha ao atualizar. Verifique os erros abaixo.')
     else:
@@ -111,7 +111,7 @@ def app_requests_delete(request, pk):
     if request.method == 'POST':
         emprestimo.delete()
         messages.success(request, 'Empréstimo excluído com sucesso!')
-        return redirect('app_requests')
+        return redirect('emprestimos:app_requests')
 
     context = {
         'item': emprestimo,
@@ -141,7 +141,7 @@ def app_requests_return(request, pk):
         else:
             messages.warning(request, 'Este empréstimo já foi devolvido.')
             
-        return redirect('app_requests')
+        return redirect('emprestimos:app_requests')
 
     # Se for GET, mostra confirmação
     context = {
